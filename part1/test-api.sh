@@ -1,9 +1,9 @@
 
-echo "试测 /api/dogs:"
+echo "test/api/dogs:"
 curl -s http://localhost:3000/api/dogs | jq
 
-echo -e "\n测试 /api/walkrequests/open:"
+echo -e "\ntest /api/walkrequests/open:"
 curl -s http://localhost:3000/api/walkrequests/open | jq
 
-echo -e "\n测试 /api/walkers/summary:"
+echo -e "\ntest /api/walkers/summary:"
 curl -s http://localhost:3000/api/walkers/summary | jq
