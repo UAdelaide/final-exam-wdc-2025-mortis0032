@@ -69,13 +69,11 @@ async function initializeData() {
     conn.release();
     console.log(' The initialization of the test data has been completed');
   } catch (error) {
-    console.error(' 初始化数据失败:', error);
+    console.error(' Data initialization failed:', error);
   }
 }
 
-// ====================== API端点实现 ======================
 
-// 端点1: /api/dogs
 app.get('/api/dogs', async (req, res) => {
   try {
     const [rows] = await pool.query(`
@@ -88,7 +86,7 @@ app.get('/api/dogs', async (req, res) => {
     `);
     res.status(200).json(rows);
   } catch (error) {
-    res.status(500).json({ error: '获取狗狗数据失败' });
+    res.status(500).json({ error: 'Failed to obtain the data of the dog' });
   }
 });
 
