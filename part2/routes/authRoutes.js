@@ -24,7 +24,7 @@ router.post('/login', async (req, res) => {
 
     const user = users[0];
 
-    // 验证密码
+
     const passwordValid = await argon2.verify(user.password, password);
 
     if (!passwordValid) {
