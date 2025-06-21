@@ -90,7 +90,6 @@ app.get('/api/dogs', async (req, res) => {
   }
 });
 
-// 端点2: /api/walkrequests/open
 app.get('/api/walkrequests/open', async (req, res) => {
   try {
     const [rows] = await pool.query(`
@@ -108,11 +107,10 @@ app.get('/api/walkrequests/open', async (req, res) => {
     `);
     res.status(200).json(rows);
   } catch (error) {
-    res.status(500).json({ error: '获取开放请求失败' });
+    res.status(500).json({ error: 'Failed to obtain the open request' });
   }
 });
 
-// 端点3: /api/walkers/summary
 app.get('/api/walkers/summary', async (req, res) => {
   try {
     const [rows] = await pool.query(`
