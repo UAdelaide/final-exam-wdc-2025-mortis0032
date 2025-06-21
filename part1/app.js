@@ -67,9 +67,9 @@ async function initializeData() {
     `);
 
     conn.release();
-    console.log('✅ 测试数据初始化完成');
+    console.log(' The initialization of the test data has been completed');
   } catch (error) {
-    console.error('❌ 初始化数据失败:', error);
+    console.error(' 初始化数据失败:', error);
   }
 }
 
