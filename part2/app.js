@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dogElement.innerHTML = `
           <div class="card-body">
             <h5 class="card-title">${dog.name}</h5>
-            <p class="card-text">品种: ${dog.breed} | 年龄: ${dog.age}岁</p>
+            <p class="card-text">va: ${dog.breed} | age: ${dog.age}</p>
           </div>
         `;
         dogsContainer.appendChild(dogElement);
