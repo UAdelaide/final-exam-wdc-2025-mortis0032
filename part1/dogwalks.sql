@@ -113,14 +113,12 @@ FOR EACH ROW
 BEGIN
     DECLARE user_role VARCHAR(10);
 
-    -- 获取用户角色
     SELECT role INTO user_role
     FROM Users
     WHERE user_id = NEW.owner_id;
 
-    -- 检查是否为owner
     IF user_role != 'owner' THEN
         SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = '只有宠物主人可以创建宠物档案';
+        SET MESSAGE_TEXT = 'Only pet owners can create pet files';
     END IF;
 END$$
