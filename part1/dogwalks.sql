@@ -122,3 +122,23 @@ BEGIN
         SET MESSAGE_TEXT = 'Only pet owners can create pet files';
     END IF;
 END$$
+
+CREATE TRIGGER trg_walker_only_application
+BEFORE INSERT ON WalkApplications
+FOR EACH ROW
+BEGIN
+    DECLARE user_role VARCHAR(10);
+
+    -- 获取用户角色
+    SELECT role INTO user_role
+    FROM Users
+    WHERE user_id = NEW.walker_id;
+
+    -- 检查是否为walker
+    IF user_role != 'walker' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = '只有遛狗员可以申请遛狗请求';
+    END IF;
+END$$
+
+DELIMITER ;
