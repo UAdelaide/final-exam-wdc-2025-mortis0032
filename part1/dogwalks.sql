@@ -91,3 +91,20 @@ BEGIN
     END IF;
 END$$
 
+CREATE TRIGGER trg_rating_after_completion
+BEFORE INSERT ON WalkRatings
+FOR EACH ROW
+BEGIN
+    DECLARE request_status VARCHAR(20);
+
+    -- 获取遛狗请求状态
+    SELECT status INTO request_status
+    FROM WalkRequests
+    WHERE request_id = NEW.request_id;
+
+    -- 检查状态是否为completed
+    IF request_status != 'completed' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Scoring can only be done after the dog walk is completed';
+    END IF;
+END$$
