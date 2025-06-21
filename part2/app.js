@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dogsContainer.innerHTML = '';
 
       if (dogs.length === 0) {
-        dogsContainer.innerHTML = '<p>You haven't added the dog yet</p>';
+        dogsContainer.innerHTML = '<p> You have not added the dog yet </p>';
         return;
       }
 
