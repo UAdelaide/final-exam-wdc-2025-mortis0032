@@ -3,19 +3,16 @@ const pool = require('./db');
 const app = express();
 const PORT = 3000;
 
-// 启动时初始化测试数据
 async function initializeData() {
   try {
     const conn = await pool.getConnection();
 
-    // 清空所有表（按外键依赖顺序）
     await conn.query('DELETE FROM WalkRatings');
     await conn.query('DELETE FROM WalkApplications');
     await conn.query('DELETE FROM WalkRequests');
     await conn.query('DELETE FROM Dogs');
     await conn.query('DELETE FROM Users');
 
-    // 插入用户
     await conn.query(`
       INSERT INTO Users (username, email, password_hash, role)
       VALUES
@@ -26,7 +23,6 @@ async function initializeData() {
         ('eve_owner', 'eve@example.com', 'hashed202', 'owner')
     `);
 
-    // 插入狗狗（使用子查询获取主人ID）
     await conn.query(`
       INSERT INTO Dogs (owner_id, name, size)
       SELECT user_id, 'Max', 'medium' FROM Users WHERE username = 'alice123'
@@ -40,7 +36,6 @@ async function initializeData() {
       SELECT user_id, 'Charlie', 'small' FROM Users WHERE username = 'eve_owner'
     `);
 
-    // 插入遛狗请求
     await conn.query(`
       INSERT INTO WalkRequests (dog_id, requested_time, duration_minutes, location, status)
       SELECT dog_id, '2025-06-10 08:00:00', 30, 'Parklands', 'open'
@@ -59,7 +54,6 @@ async function initializeData() {
       FROM Dogs WHERE name = 'Charlie' AND owner_id = (SELECT user_id FROM Users WHERE username = 'eve_owner')
     `);
 
-    // 插入评分
     await conn.query(`
       INSERT INTO WalkRatings (request_id, walker_id, owner_id, rating)
       SELECT
