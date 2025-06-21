@@ -12,7 +12,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     secure: false,
-    maxAge: 24 * 60 * 60 * 1000 // 24小时
+    maxAge: 24 * 60 * 60 * 1000
   }
 }));
 
@@ -21,7 +21,7 @@ const authenticate = (req, res, next) => {
   if (req.session.user) {
     next();
   } else {
-    res.status(401).json({ message: '未授权，请先登录' });
+    res.status(401).json({ message: 'Unauthorized. Please log in first' });
   }
 };
 
