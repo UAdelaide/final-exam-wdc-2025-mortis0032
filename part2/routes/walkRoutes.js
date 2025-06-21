@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
   const { walkerId } = req.query;
 
   if (!walkerId) {
-    return res.status(400).json({ message: '缺少walkerId参数' });
+    return res.status(400).json({ message: 'The parameter "walkerId" is missing.' });
   }
 
   try {
