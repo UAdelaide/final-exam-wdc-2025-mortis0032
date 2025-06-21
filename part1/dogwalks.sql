@@ -140,3 +140,8 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+CREATE INDEX idx_walkrequests_status ON WalkRequests(status);
+CREATE INDEX idx_walkrequests_time ON WalkRequests(requested_time);
+CREATE INDEX idx_walkapplications_status ON WalkApplications(status);
+CREATE INDEX idx_walkratings_walker ON WalkRatings(walker_id);
