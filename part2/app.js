@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <h5 class="card-title">${task.dog_name}</h5>
             <p class="card-text">
               master: ${task.owner_name}<br>
-              time: ${task.time} | 时长: ${task.duration}分钟
+              time: ${task.time} | duration: ${task.duration}minute
             </p>
           </div>
         `;
