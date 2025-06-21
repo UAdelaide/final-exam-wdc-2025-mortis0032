@@ -31,7 +31,6 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: '无效的邮箱或密码' });
     }
 
-    // 创建会话
     req.session.user = {
       id: user.id,
       name: user.name,
@@ -40,7 +39,7 @@ router.post('/login', async (req, res) => {
     };
 
     res.json({
-      message: '登录成功',
+      message: 'login successfully',
       user: {
         id: user.id,
         name: user.name,
@@ -49,8 +48,7 @@ router.post('/login', async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('login error
-', error);
+    console.error('login error:', error);
     res.status(500).json({ message: 'server error' });
   }
 });
