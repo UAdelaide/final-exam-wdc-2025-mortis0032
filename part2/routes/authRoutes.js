@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
     });
   } catch (error) {
     console.error('登录错误:', error);
-    res.status(500).json({ message: '服务器错误' });
+    res.status(500).json({ message: 'server error' });
   }
 });
 
