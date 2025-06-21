@@ -1,0 +1,25 @@
+{
+  "name": "dog-walk-service-api",
+  "version": "1.0.0",
+  "description": "API for dog walking service",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "express",
+    "mysql",
+    "api"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "mysql2": "^3.9.7"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
+}
