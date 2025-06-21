@@ -1,7 +1,7 @@
-const express = require('express')；
+const express = require('express') 
 const path = require('path');
 require('dotenv').config();
-const session = require('express-session'); // 添加会话管理
+const session = require('express-session');
 
 const app = express();
 
