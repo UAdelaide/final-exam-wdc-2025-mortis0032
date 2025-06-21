@@ -90,7 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
       tasksContainer.innerHTML = '';
 
       if (tasks.length === 0) {
-        tasksContainer.innerHTML = '<p>您今天没有遛狗任务</p>';
+        tasksContainer.innerHTML = '<p>You do not have a dog-walking task today
+
+</p>';
         return;
       }
 
