@@ -136,7 +136,6 @@ app.get('/api/walkers/summary', async (req, res) => {
       GROUP BY u.user_id
     `);
 
-    // 格式化平均评分
     const formatted = rows.map(row => ({
       ...row,
       average_rating: row.average_rating ? Number(row.average_rating).toFixed(1) : null
@@ -148,7 +147,6 @@ app.get('/api/walkers/summary', async (req, res) => {
   }
 });
 
-// 启动服务器
 app.listen(PORT, async () => {
   console.log(`🚀 服务器运行中: http://localhost:${PORT}`);
   await initializeData();
