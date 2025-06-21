@@ -101,8 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="card-body">
             <h5 class="card-title">${task.dog_name}</h5>
             <p class="card-text">
-              masyer: ${task.owner_name}<br>
-              时间: ${task.time} | 时长: ${task.duration}分钟
+              master: ${task.owner_name}<br>
+              time: ${task.time} | 时长: ${task.duration}分钟
             </p>
           </div>
         `;
