@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showLogin();
       }
     } catch (error) {
-      console.error('检查会话失败:', error);
+      console.error('Check for session failure:', error);
       showLogin();
     }
   }
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     userName.textContent = user.name;
-    userType.textContent = user.type === 'owner' ? '主人' : '遛狗人';
+    userType.textContent = user.type === 'owner' ? 'master' : '遛狗人';
 
     if (user.type === 'owner') {
       ownerDashboard.style.display = 'block';
