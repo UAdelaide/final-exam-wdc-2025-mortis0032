@@ -1,61 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../models/db');
+const db = require('../db/db');
 
-// GET all walk requests (for walkers to view)
+
 router.get('/', async (req, res) => {
-  try {
-    const [rows] = await db.query(`
-      SELECT wr.*, d.name AS dog_name, d.size, u.username AS owner_name
-      FROM WalkRequests wr
-      JOIN Dogs d ON wr.dog_id = d.dog_id
-      JOIN Users u ON d.owner_id = u.user_id
-      WHERE wr.status = 'open'
-    `);
-    res.json(rows);
-  } catch (error) {
-    console.error('SQL Error:', error);
-    res.status(500).json({ error: 'Failed to fetch walk requests' });
+  const { walkerId } = req.query;
+
+  if (!walkerId) {
+    return res.status(400).json({ message: '缺少walkerId参数' });
   }
-});
-
-// POST a new walk request (from owner)
-router.post('/', async (req, res) => {
-  const { dog_id, requested_time, duration_minutes, location } = req.body;
 
   try {
-    const [result] = await db.query(`
-      INSERT INTO WalkRequests (dog_id, requested_time, duration_minutes, location)
-      VALUES (?, ?, ?, ?)
-    `, [dog_id, requested_time, duration_minutes, location]);
 
-    res.status(201).json({ message: 'Walk request created', request_id: result.insertId });
+    const [walks] = await db.query(`
+      SELECT w.id, w.time, w.duration, d.name AS dog_name, p.name AS owner_name
+      FROM Walk w
+      JOIN Dog d ON w.dog_id = d.id
+      JOIN Person p ON d.owner_id = p.id
+      WHERE w.walker_id = ? AND w.date = CURDATE()
+    `, [walkerId]);
+
+    res.json(walks);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create walk request' });
-  }
-});
-
-// POST an application to walk a dog (from walker)
-router.post('/:id/apply', async (req, res) => {
-  const requestId = req.params.id;
-  const { walker_id } = req.body;
-
-  try {
-    await db.query(`
-      INSERT INTO WalkApplications (request_id, walker_id)
-      VALUES (?, ?)
-    `, [requestId, walker_id]);
-
-    await db.query(`
-      UPDATE WalkRequests
-      SET status = 'accepted'
-      WHERE request_id = ?
-    `, [requestId]);
-
-    res.status(201).json({ message: 'Application submitted' });
-  } catch (error) {
-    console.error('SQL Error:', error);
-    res.status(500).json({ error: 'Failed to apply for walk' });
+    console.error('获取遛狗任务失败:', error);
+    res.status(500).json({ message: '服务器错误' });
   }
 });
 
