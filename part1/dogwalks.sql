@@ -78,3 +78,16 @@ BEGIN
     END IF;
 END$$
 
+CREATE TRIGGER trg_reject_other_applications
+AFTER UPDATE ON WalkApplications
+FOR EACH ROW
+BEGIN
+    IF NEW.status = 'accepted' AND OLD.status != 'accepted' THEN
+        UPDATE WalkApplications
+        SET status = 'rejected'
+        WHERE request_id = NEW.request_id
+        AND application_id != NEW.application_id
+        AND status = 'pending';
+    END IF;
+END$$
+
