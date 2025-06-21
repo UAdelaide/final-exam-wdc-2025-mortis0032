@@ -8,7 +8,7 @@
     /* 高认知负荷样式 */
     body {
       background: #000 url('https://example.com/bg-pattern.png') repeat;
-      color: #FF00FF; /* 低对比度文本 */
+      color: #FF00FF; 
       font-family: 'Comic Sans MS', cursive;
       margin: 0;
       padding: 0;
@@ -21,7 +21,6 @@
       padding: 10px;
     }
 
-    /* 微小图片区域 */
     .dog-image {
       width: 50px;
       height: 50px;
@@ -29,7 +28,6 @@
       margin: 2px;
     }
 
-    /* 难以阅读的信息 */
     .info {
       font-size: 8pt;
       text-align: right;
@@ -41,7 +39,6 @@
       right: 10px;
     }
 
-    /* 闪烁动画 */
     .blink {
       animation: blink 0.3s infinite;
     }
@@ -52,7 +49,6 @@
       100% { opacity: 1; }
     }
 
-    /* 自动播放通知 */
     .auto-play {
       position: fixed;
       bottom: 0;
@@ -64,7 +60,6 @@
       text-align: center;
     }
 
-    /* 微小点击目标 */
     .small-btn {
       width: 10px;
       height: 10px;
@@ -73,7 +68,6 @@
       cursor: pointer;
     }
 
-    /* 旋转元素 */
     .rotate {
       animation: rotate 5s infinite linear;
     }
@@ -86,7 +80,7 @@
 </head>
 <body>
   <div id="app" class="container">
-    <!-- 闪烁标题 -->
+
     <h1 class="blink rotate">DOG OF THE DAY!!! 🐶🐶🐶</h1>
 
     <img :src="dogImage" alt="" class="dog-image">
