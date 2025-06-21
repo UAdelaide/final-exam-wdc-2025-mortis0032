@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tasksContainer.appendChild(taskElement);
       });
     } catch (error) {
-      console.error('加载任务数据失败:', error);
+      console.error('Failed to load the task data:', error);
     }
   }
 
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (response.ok) {
         showDashboard(data.user);
       } else {
-        loginError.textContent = data.message || '登录失败';
+        loginError.textContent = data.message || 'login failure';
         loginError.style.display = 'block';
       }
     } catch (error) {
