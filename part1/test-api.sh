@@ -1,5 +1,5 @@
 
-echo "测试 /api/dogs:"
+echo "试测 /api/dogs:"
 curl -s http://localhost:3000/api/dogs | jq
 
 echo -e "\n测试 /api/walkrequests/open:"
