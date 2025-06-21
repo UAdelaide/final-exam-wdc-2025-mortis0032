@@ -90,9 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tasksContainer.innerHTML = '';
 
       if (tasks.length === 0) {
-        tasksContainer.innerHTML = '<p>You do not have a dog-walking task today
-
-</p>';
+        tasksContainer.innerHTML = '<p>You do not have a dog-walking task today</p>';
         return;
       }
 
@@ -103,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="card-body">
             <h5 class="card-title">${task.dog_name}</h5>
             <p class="card-text">
-              主人: ${task.owner_name}<br>
+              masyer: ${task.owner_name}<br>
               时间: ${task.time} | 时长: ${task.duration}分钟
             </p>
           </div>
