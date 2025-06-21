@@ -77,3 +77,4 @@ BEGIN
         WHERE request_id = NEW.request_id;
     END IF;
 END$$
+
