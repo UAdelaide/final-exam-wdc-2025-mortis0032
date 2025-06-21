@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     userName.textContent = user.name;
-    userType.textContent = user.type === 'owner' ? 'master' : '遛狗人';
+    userType.textContent = user.type === 'owner' ? 'master' : 'dog walker';
 
     if (user.type === 'owner') {
       ownerDashboard.style.display = 'block';
