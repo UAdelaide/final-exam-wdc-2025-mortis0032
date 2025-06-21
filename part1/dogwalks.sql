@@ -53,3 +53,29 @@ CREATE TABLE WalkRatings (
     FOREIGN KEY (owner_id) REFERENCES Users(user_id),
     CONSTRAINT unique_rating_per_walk UNIQUE (request_id)
 );
+DELIMITER $$
+
+-- 触发器1: 确保每个遛狗请求只能接受一个申请
+CREATE TRIGGER trg_one_accept_per_request
+BEFORE UPDATE ON WalkApplications
+FOR EACH ROW
+BEGIN
+    -- 仅当状态变为accepted时检查
+    IF NEW.status = 'accepted' AND OLD.status != 'accepted' THEN
+
+        IF EXISTS (
+            SELECT 1 FROM WalkApplications
+            WHERE request_id = NEW.request_id
+            AND status = 'accepted'
+            AND application_id != NEW.application_id
+        ) THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = '每个遛狗请求只能接受一个遛狗员申请';
+        END IF;
+
+
+        UPDATE WalkRequests
+        SET status = 'accepted'
+        WHERE request_id = NEW.request_id;
+    END IF;
+END$$
