@@ -55,12 +55,10 @@ CREATE TABLE WalkRatings (
 );
 DELIMITER $$
 
--- 触发器1: 确保每个遛狗请求只能接受一个申请
 CREATE TRIGGER trg_one_accept_per_request
 BEFORE UPDATE ON WalkApplications
 FOR EACH ROW
 BEGIN
-    -- 仅当状态变为accepted时检查
     IF NEW.status = 'accepted' AND OLD.status != 'accepted' THEN
 
         IF EXISTS (
@@ -70,7 +68,7 @@ BEGIN
             AND application_id != NEW.application_id
         ) THEN
             SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = '每个遛狗请求只能接受一个遛狗员申请';
+            SET MESSAGE_TEXT = 'Each dog-walking request can only accept one dog walker application';
         END IF;
 
 
