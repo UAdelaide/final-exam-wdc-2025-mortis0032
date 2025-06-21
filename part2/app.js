@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ownerDashboard = document.getElementById('owner-dashboard');
   const walkerDashboard = document.getElementById('walker-dashboard');
 
-  // 检查会话状态
+
   async function checkSession() {
     try {
       const response = await fetch('/api/auth/check-session');
@@ -26,22 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 显示登录界面
+
   function showLogin() {
     loginPage.style.display = 'flex';
     dashboardPage.style.display = 'none';
   }
 
-  // 显示仪表盘
+
   function showDashboard(user) {
     loginPage.style.display = 'none';
     dashboardPage.style.display = 'block';
 
-    // 更新用户信息
+
     userName.textContent = user.name;
     userType.textContent = user.type === 'owner' ? '主人' : '遛狗人';
 
-    // 根据用户类型显示相应仪表盘
     if (user.type === 'owner') {
       ownerDashboard.style.display = 'block';
       walkerDashboard.style.display = 'none';
