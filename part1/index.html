@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dog of the Day - Bad UX Example</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    /* 高认知负荷样式 */
+    body {
+      background: #000 url('https://example.com/bg-pattern.png') repeat;
+      color: #FF00FF; /* 低对比度文本 */
+      font-family: 'Comic Sans MS', cursive;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+
+    /* 微小图片区域 */
+    .dog-image {
+      width: 50px;
+      height: 50px;
+      border: 5px dashed yellow;
+      margin: 2px;
+    }
+
+    /* 难以阅读的信息 */
+    .info {
+      font-size: 8pt;
+      text-align: right;
+      margin-top: 100px;
+      background: rgba(0,0,0,0.7);
+      padding: 5px;
+      position: absolute;
+      bottom: 50px;
+      right: 10px;
+    }
+
+    /* 闪烁动画 */
+    .blink {
+      animation: blink 0.3s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* 自动播放通知 */
+    .auto-play {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: red;
+      color: white;
+      padding: 20px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    /* 微小点击目标 */
+    .small-btn {
+      width: 10px;
+      height: 10px;
+      background: blue;
+      margin: 50px auto;
+      cursor: pointer;
+    }
+
+    /* 旋转元素 */
+    .rotate {
+      animation: rotate 5s infinite linear;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="container">
+    <!-- 闪烁标题 -->
+    <h1 class="blink rotate">DOG OF THE DAY!!! 🐶🐶🐶</h1>
+
+    <!-- 微小图片 -->
+    <img :src="dogImage" alt="" class="dog-image">
+
+    <!-- 难以阅读的信息 -->
+    <div class="info">
+      <p>NAME: {{ dogName.toUpperCase() }}</p>
+      <p>BREED: {{ dogBreed }}</p>
+      <p>TODAY'S SPECIAL: {{ specialOffer }}</p>
+      <p>OWNER CONTACT: {{ ownerContact }}</p>
+      <p>VET INFO: {{ vetInfo }}</p>
+    </div>
+
+    <!-- 微小点击目标 -->
+    <div class="small-btn" @click="showMoreInfo"></div>
+
+    <!-- 自动播放音频 -->
+    <audio src="https://example.com/loud-barking.mp3" autoplay loop></audio>
+
+    <!-- 闪烁的通知 -->
+    <div class="auto-play blink">
+      AUTO-PLAY AUDIO ENABLED - CANCEL?
+      <button style="font-size:8px">YES</button>
+      <button style="font-size:8px">NO</button>
+    </div>
+  </div>
+
+  <script>
+    const { createApp, ref } = Vue
+
+    createApp({
+      setup() {
+        const dogImage = ref('')
+        const dogName = ref('Sparky')
+        const dogBreed = ref('Golden Retriever')
+        const specialOffer = ref('FREE WALK TODAY ONLY!')
+        const ownerContact = ref('555-1234 (call after 9pm only)')
+        const vetInfo = ref('Dr. Smith - Emergency: 555-5678')
+
+        // 从Dog API获取随机图片
+        fetch('https://dog.ceo/api/breeds/image/random')
+          .then(response => response.json())
+          .then(data => {
+            dogImage.value = data.message
+          })
+          .catch(() => {
+            dogImage.value = 'https://via.placeholder.com/50'
+          })
+
+        // 显示更多信息（微小按钮功能）
+        const showMoreInfo = () => {
+          alert('You clicked the tiny button!')
+        }
+
+        return {
+          dogImage,
+          dogName,
+          dogBreed,
+          specialOffer,
+          ownerContact,
+          vetInfo,
+          showMoreInfo
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>
