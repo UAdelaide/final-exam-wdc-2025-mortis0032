@@ -137,8 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
         loginError.style.display = 'block';
       }
     } catch (error) {
-      console.error('登录请求失败:', error);
-      loginError.textContent = '无法连接到服务器';
+      console.error('The login request failed:', error);
+      loginError.textContent = 'unable to connect to server';
       loginError.style.display = 'block';
     }
   });
