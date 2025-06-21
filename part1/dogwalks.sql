@@ -129,15 +129,13 @@ FOR EACH ROW
 BEGIN
     DECLARE user_role VARCHAR(10);
 
-    -- 获取用户角色
     SELECT role INTO user_role
     FROM Users
     WHERE user_id = NEW.walker_id;
 
-    -- 检查是否为walker
     IF user_role != 'walker' THEN
         SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = '只有遛狗员可以申请遛狗请求';
+        SET MESSAGE_TEXT = 'Only dog walkers can apply for a dog-walking request';
     END IF;
 END$$
 
