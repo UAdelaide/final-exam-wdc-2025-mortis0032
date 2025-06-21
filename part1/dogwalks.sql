@@ -97,14 +97,30 @@ FOR EACH ROW
 BEGIN
     DECLARE request_status VARCHAR(20);
 
-    -- 获取遛狗请求状态
     SELECT status INTO request_status
     FROM WalkRequests
     WHERE request_id = NEW.request_id;
 
-    -- 检查状态是否为completed
     IF request_status != 'completed' THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Scoring can only be done after the dog walk is completed';
+    END IF;
+END$$
+
+CREATE TRIGGER trg_owner_only_dog_creation
+BEFORE INSERT ON Dogs
+FOR EACH ROW
+BEGIN
+    DECLARE user_role VARCHAR(10);
+
+    -- 获取用户角色
+    SELECT role INTO user_role
+    FROM Users
+    WHERE user_id = NEW.owner_id;
+
+    -- 检查是否为owner
+    IF user_role != 'owner' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = '只有宠物主人可以创建宠物档案';
     END IF;
 END$$
