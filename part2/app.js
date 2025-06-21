@@ -71,13 +71,13 @@ document.addEventListener('DOMContentLoaded', () => {
         dogElement.innerHTML = `
           <div class="card-body">
             <h5 class="card-title">${dog.name}</h5>
-            <p class="card-text">va: ${dog.breed} | age: ${dog.age}</p>
+            <p class="card-text">variety: ${dog.breed} | age: ${dog.age}</p>
           </div>
         `;
         dogsContainer.appendChild(dogElement);
       });
     } catch (error) {
-      console.error('加载狗狗数据失败:', error);
+      console.error('Failed to load the dog data:', error);
     }
   }
 
