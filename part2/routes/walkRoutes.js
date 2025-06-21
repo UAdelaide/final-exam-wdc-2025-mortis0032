@@ -22,8 +22,8 @@ router.get('/', async (req, res) => {
 
     res.json(walks);
   } catch (error) {
-    console.error('获取遛狗任务失败:', error);
-    res.status(500).json({ message: '服务器错误' });
+    console.error('Failed to obtain the dog-walking task:', error);
+    res.status(500).json({ message: 'server error' });
   }
 });
 
