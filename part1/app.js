@@ -143,11 +143,11 @@ app.get('/api/walkers/summary', async (req, res) => {
 
     res.status(200).json(formatted);
   } catch (error) {
-    res.status(500).json({ error: '获取遛狗员摘要失败' });
+    res.status(500).json({ error: 'Failed to obtain the summary of the dog walker' });
   }
 });
 
 app.listen(PORT, async () => {
-  console.log(`🚀 服务器运行中: http://localhost:${PORT}`);
+  console.log(` The server is running.: http://localhost:${PORT}`);
   await initializeData();
 });
