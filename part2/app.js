@@ -31,23 +31,23 @@ const checkUserType = (type) => {
     if (req.session.user && req.session.user.type === type) {
       next();
     } else {
-      res.status(403).json({ message: '无权访问此资源' });
+      res.status(403).json({ message: 'Access to this resource is not authorized' });
     }
   };
 };
 
-// Middleware
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '/public')));
 
-// Routes
+
 const walkRoutes = require('./routes/walkRoutes');
 const userRoutes = require('./routes/userRoutes');
-const authRoutes = require('./routes/authRoutes'); // 添加认证路由
+const authRoutes = require('./routes/authRoutes');
 
 app.use('/api/walks', authenticate, walkRoutes);
 app.use('/api/users', authenticate, userRoutes);
-app.use('/api/auth', authRoutes); // 使用认证路由
+app.use('/api/auth', authRoutes);
 
-// 导出app
+
 module.exports = app;
