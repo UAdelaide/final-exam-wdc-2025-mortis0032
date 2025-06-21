@@ -3,7 +3,6 @@ const router = express.Router();
 const db = require('../db/db');
 const argon2 = require('argon2');
 
-// 登录路由
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -12,7 +11,6 @@ router.post('/login', async (req, res) => {
   }
 
   try {
-    // 查询用户
     const [users] = await db.query(
       'SELECT id, name, email, password, type FROM Person WHERE email = ?',
       [email]
@@ -53,7 +51,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// 注销路由
+
 router.post('/logout', (req, res) => {
   req.session.destroy(err => {
     if (err) {
@@ -64,7 +62,7 @@ router.post('/logout', (req, res) => {
   });
 });
 
-// 检查会话路由
+
 router.get('/check-session', (req, res) => {
   if (req.session.user) {
     res.json({
