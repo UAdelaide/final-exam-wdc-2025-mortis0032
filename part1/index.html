@@ -89,10 +89,8 @@
     <!-- 闪烁标题 -->
     <h1 class="blink rotate">DOG OF THE DAY!!! 🐶🐶🐶</h1>
 
-    <!-- 微小图片 -->
     <img :src="dogImage" alt="" class="dog-image">
 
-    <!-- 难以阅读的信息 -->
     <div class="info">
       <p>NAME: {{ dogName.toUpperCase() }}</p>
       <p>BREED: {{ dogBreed }}</p>
@@ -101,13 +99,10 @@
       <p>VET INFO: {{ vetInfo }}</p>
     </div>
 
-    <!-- 微小点击目标 -->
     <div class="small-btn" @click="showMoreInfo"></div>
 
-    <!-- 自动播放音频 -->
     <audio src="https://example.com/loud-barking.mp3" autoplay loop></audio>
 
-    <!-- 闪烁的通知 -->
     <div class="auto-play blink">
       AUTO-PLAY AUDIO ENABLED - CANCEL?
       <button style="font-size:8px">YES</button>
@@ -127,7 +122,6 @@
         const ownerContact = ref('555-1234 (call after 9pm only)')
         const vetInfo = ref('Dr. Smith - Emergency: 555-5678')
 
-        // 从Dog API获取随机图片
         fetch('https://dog.ceo/api/breeds/image/random')
           .then(response => response.json())
           .then(data => {
@@ -137,7 +131,6 @@
             dogImage.value = 'https://via.placeholder.com/50'
           })
 
-        // 显示更多信息（微小按钮功能）
         const showMoreInfo = () => {
           alert('You clicked the tiny button!')
         }
