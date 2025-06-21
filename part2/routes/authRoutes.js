@@ -8,7 +8,7 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ message: '邮箱和密码不能为空' });
+    return res.status(400).json({ message: 'The email address and password cannot be empty' });
   }
 
   try {
@@ -19,7 +19,7 @@ router.post('/login', async (req, res) => {
     );
 
     if (users.length === 0) {
-      return res.status(401).json({ message: '无效的邮箱或密码' });
+      return res.status(401).json({ message: 'Invalid email address or password' });
     }
 
     const user = users[0];
@@ -28,7 +28,7 @@ router.post('/login', async (req, res) => {
     const passwordValid = await argon2.verify(user.password, password);
 
     if (!passwordValid) {
-      return res.status(401).json({ message: '无效的邮箱或密码' });
+      return res.status(401).json({ message: 'Invalid email address or password' });
     }
 
     req.session.user = {
