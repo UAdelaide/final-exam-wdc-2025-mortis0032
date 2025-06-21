@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
       await fetch('/api/auth/logout', { method: 'POST' });
       showLogin();
     } catch (error) {
-      console.error('注销失败:', error);
+      console.error('Cancellation failed:', error);
     }
   });
 
